@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>minify</title>
+        <meta charset="UTF-8">
+       
+
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+        <style>
+        body{ margin: 0; background-color: #D1D1D1}
+		textarea{ width: 600px; height: 40vh; border: 2px solid black; font-family: monospace; color: black; margin: 25vh 0; padding: 20px; box-sizing: border-box; resize:none; background-color: #D1D1D1;}
+		input{ float: right; position: absolute; margin-top:43vh; margin-left:30px; padding: 10px; background-color: #D1D1D1; border: 2px solid black; color: black;}
+		input:hover{ background-color: black; color: white; cursor: pointer;}
+		</style>
+    </head>
+    <body>
+<div align="center">
+	<img src="minify.png" width="120" style="position: absolute; left: 10px; top: 10px;">
+	<form action="output.php" method="post" target="_blank">
+		<textarea id="original" name="original" placeholder="paste your HTML here"></textarea>
+		
+		<input type="submit" value="MINIFY">
+		
+	</form> 
+</div>
+    
+
+
+</html>
