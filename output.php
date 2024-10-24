@@ -5,7 +5,8 @@
         <meta charset="UTF-8">
        
 
-        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
 
         <style>
         body{ margin: 0; background-color: #D1D1D1; font-family: monospace;}
@@ -99,26 +100,27 @@
 				fclose($myfile);
 
 				// download button for file
-				echo "<table cellpadding='10'><tr><td>Original Size: " . $original_size . " bytes<br>Minified Size: " . $minified_size . " bytes<br>Compression: " . round(($minified_size / $original_size) * 100, 2) . "%</td><td><a id='dlbutton' href='" . $randomFilename . ".html' download>Download Minified File</a></td></tr></table>";
+				echo "<table cellpadding='10'><tr><td>Original Size: " . $original_size . " bytes<br>Minified Size: " . $minified_size . " bytes<br>Compression: " . round(($minified_size / $original_size) * 100, 2) . "%</td><td><a id='dlbutton' href='minified-files/" . $randomFilename . ".html' download>Download Minified File</a></td></tr></table>";
 			?> 
 		</div>
 		
+		<!-- jQuery script to delete the file after it is downloaded -->
 		<script>
 			// delete the created file after it is downloaded
-			$(document).ready(function(){
-				$("#dlbutton").click(function(){
-					$.ajax({
-						url: 'delete_file.php',
-						type: 'POST',
-						data: { filename: '<?php echo $randomFilename; ?>.html' },
-						success: function(response) {
-							console.log('File deleted successfully');
-						},
-						error: function(xhr, status, error) {
-							console.error('Error deleting file:', error);
-						}
-					});
-					
+			$(document).ready(function(){				
+				console.log("ready");
+				$('#dlbutton').click(function(){
+					// get the latest file created
+					var latestFile = '<?php echo "minified-files/" . $randomFilename . ".html"; ?>';
+					console.log(latestFile);
+					var ajaxurl = 'delete.php',
+					data =  {'file': latestFile};
+					// Delay the deletion by 5 seconds (5000 milliseconds)
+					setTimeout(function() {
+						$.post(ajaxurl, data, function(response) {
+							alert("File removed from server.");
+						});
+					}, 5000); // 5 seconds delay
 				});
 			});
 			
